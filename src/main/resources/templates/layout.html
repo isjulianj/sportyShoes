@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <!-- You can allow child templates to customize the title -->
+    <title layout:title-pattern="${title}">My App</title>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Insert the header fragment -->
+<header th:insert="fragments/header :: header"></header>
+
+<!-- This is the content area that will be filled by child templates -->
+<main class="h-full" layout:fragment="content">
+    <!-- Default content can go here -->
+</main>
+
+<!-- Insert the footer fragment -->
+<footer class="mt-auto" th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>
