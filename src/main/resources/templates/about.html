@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<!-- This fragment’s content will replace the 'content' section in layout.html -->
+<div layout:fragment="content">
+    <section class="mx-auto flex justify-center mb-6 px-4 h-full">
+        <div class="prose lg:prose-lg  text-justify prose-h1:text-left ">
+            <div class="about-section py-16 text-gray-800">
+                <div class=" mx-auto">
+                    <h2 class="text-4xl font-bold text-primary mb-4">About Sporty Shoes</h2>
+                    <p class="text-lg mb-6">
+                        Step into performance. Step into style. At <strong>Sporty Shoes</strong>, we believe the right pair of shoes can make all the difference—whether you're sprinting on the track, pushing limits in the gym, or simply taking on your daily hustle.
+                    </p>
+
+                    <h3 class="text-2xl font-semibold text-secondary mb-3">Our Mission</h3>
+                    <p class="text-lg mb-6">
+                        We’re here to fuel your passion for movement by providing **high-performance footwear** that blends innovation, durability, and style—so you always perform at your best.
+                    </p>
+
+                    <h3 class="text-2xl font-semibold text-accent mb-3">Why Choose Us?</h3>
+                    <ul class="text-lg mb-6 list-disc list-inside">
+                        <li><strong>Top-Notch Quality</strong> – Shoes built with the latest tech for comfort & durability.</li>
+                        <li><strong>Designed for Every Athlete</strong> – The perfect fit for runners, gym lovers, and casual walkers.</li>
+                        <li><strong>Style Meets Performance</strong> – Shoes that make you look as good as you feel.</li>
+                        <li><strong>Customer-First Experience</strong> – Fast shipping, easy returns & exceptional support.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold text-dark mb-3">Join the Movement</h3>
+                    <p class="text-lg mb-6">
+                        At <strong>Sporty Shoes</strong>, it’s more than just footwear—it’s a **lifestyle**. Whether you're chasing records or chasing your next adventure, we’ve got the gear to keep you moving.
+                    </p>
+
+                    <div class="text-lg font-medium">
+                        📍 <strong>Location:</strong> London<br>
+                        📧 <strong>Email:</strong> <a href="mailto:hi@sportyShoes.com" class="text-primary hover:underline">hi@sportyShoes.com</a><br>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+</body>
+</html>
