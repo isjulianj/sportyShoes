@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
+        model.addAttribute("title", "Home - Sporty Shoes");
+        model.addAttribute("metaDescription", "Discover our collection of sporty shoes designed for performance and style.");
+        model.addAttribute("metaKeywords", "sporty shoes, sneakers, performance, style");
 
         return "home";
     }
