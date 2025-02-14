@@ -1,93 +1,76 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
-    <link th:href="@{/main.css}" rel="stylesheet" />
+    <title>Join Sporty Shoes</title>
+    <link th:href="@{/main.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="flex flex-col min-h-screen justify-center items-center">
     <div class="mb-6 flex items-center gap-4">
-        <div th:insert="fragments/logo :: logo" class=" w-40 mx-auto" ></div>
-        <div class="">
-        <p class="text-2xl font-bold word-break">Join</p>
-        <p class="text-2xl font-bold word-break">Sporty Shoes</p>
+        <div th:insert="fragments/logo :: logo" class="w-40 mx-auto"></div>
+        <div>
+            <p class="text-2xl font-bold">Join</p>
+            <p class="text-2xl font-bold">Sporty Shoes</p>
         </div>
-
     </div>
-    <div class="mx-auto w-full max-w-md px-8">
 
-        <Form method="post" class="space-y-6" noValidate>
+    <div class="mx-auto w-full max-w-lg px-8">
+        <form th:action="@{/join}" th:object="${registrationDto}" method="post" class="space-y-6" novalidate>
+            <div class="flex gap-2 w-full justify-between">
+                <div>
+                    <label for="first_name" class="block text-sm font-medium text-gray-700">
+                        First Name
+                    </label>
+                    <div class="mt-1">
+                        <input id="first_name" type="text" th:field="*{firstName}" required autofocus autocomplete="first_name"
+                               class="w-full rounded border border-gray-500 px-2 py-1 text-lg"/>
+                    </div>
+                </div>
+                <div>
+                    <label for="last_name" class="block text-sm font-medium text-gray-700">
+                        Surname
+                    </label>
+                    <div class="mt-1">
+                        <input id="last_name" type="text" th:field="*{lastName}" required autofocus autocomplete="last_name"
+                               class="w-full rounded border border-gray-500 px-2 py-1 text-lg"/>
+                    </div>
+                </div>
+            </div>
+
             <div>
-                <label
-                        htmlFor="email"
-                        class="block text-sm font-medium text-gray-700"
-                >
+                <label for="email" class="block text-sm font-medium text-gray-700">
                     Email address
                 </label>
                 <div class="mt-1">
-                    <input
-                            id="email"
-                            required
-                            autoFocus="true"
-                            name="email"
-                            type="email"
-                            autoComplete="email"
-                            aria-describedby="email-error"
-                            class="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-                    />
-<!--                    {actionData?.errors?.email ? (-->
-<!--                    <div class="pt-1 text-red-700" id="email-error">-->
-<!--                        {actionData.errors.email}-->
-<!--                    </div>-->
-<!--                    ) : null}-->
+                    <input id="email" type="email" th:field="*{email}" required autofocus autocomplete="email"
+                           aria-describedby="email-error"
+                           class="w-full rounded border border-gray-500 px-2 py-1 text-lg"/>
                 </div>
             </div>
-
             <div>
-                <label
-                        htmlFor="password"
-                        class="block text-sm font-medium text-gray-700"
-                >
+                <label for="password" class="block text-sm font-medium text-gray-700">
                     Password
                 </label>
                 <div class="mt-1">
-                    <input
-                            id="password"
-                            ref={passwordRef}
-                            name="password"
-                            type="password"
-                            autoComplete="new-password"
-                            aria-describedby="password-error"
-                            class="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-                    />
-<!--                    {actionData?.errors?.password ? (-->
-<!--                    <div class="pt-1 text-red-700" id="password-error">-->
-<!--                        {actionData.errors.password}-->
-<!--                    </div>-->
-<!--                    ) : null}-->
+                    <input id="password" type="password" th:field="*{password}" required autocomplete="new-password"
+                           aria-describedby="password-error"
+                           class="w-full rounded border border-gray-500 px-2 py-1 text-lg"/>
                 </div>
             </div>
-
-            <input class="text-purple-600" type="hidden" name="redirectTo" value={redirectTo} />
-            <button
-                    type="submit"
-                    class="w-full rounded bg-[#ff4893]  py-2 px-4 text-white hover:bg-[#e54084] focus:bg-[#ff5a9d]"
-            >
+            <input type="hidden" name="redirectTo" th:value="${redirectTo}" />
+            <button type="submit"
+                    class="w-full rounded bg-[#ff4893] py-2 px-4 text-white hover:bg-[#e54084] focus:bg-[#ff5a9d]">
                 Create Account
             </button>
             <div class="flex items-center justify-center">
                 <div class="text-center text-sm text-gray-500">
                     Already have an account?
-                    <a class="text-[#ff4893] underline"
-                            href="/login"
-                    >
-                    Log in
-                    </a>
+                    <a class="text-[#ff4893] underline" href="/login">Log in</a>
                 </div>
             </div>
-        </Form>
+        </form>
     </div>
 </div>
 </body>

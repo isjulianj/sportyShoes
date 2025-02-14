@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <!-- You can allow child templates to customize the title -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title layout:title-pattern="${title}">Sporty shoes</title>
+    <title layout:title-pattern="${title}" th:text="${title}">Sporty shoes</title>
     <meta name="description" th:if="${metaDescription}" th:content="${metaDescription}" />
     <meta name="keywords" th:if="${metaKeywords}" th:content="${metaKeywords}" />
     <link th:href="@{/main.css}" rel="stylesheet" />

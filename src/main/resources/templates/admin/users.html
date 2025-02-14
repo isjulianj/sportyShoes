@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+<body>
+<!-- This fragment’s content will replace the 'content' section in layout.html -->
+<div layout:fragment="adminContent">
+    <section class="w-full p-6 prose">
+        <h1>Users</h1>
+        <table class="table w-full">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td>
+                    <div class="flex items-center space-x-3">
+                        <a th:href="@{'/admin/users/edit/' + ${user.id}}" class="font-bold link" th:text="${user.first_name} + ' ' + ${user.last_name}"></a>
+                    </div>
+                </td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.slug}"></td>
+                <td>
+                    <a th:href="@{'/admin/users/edit/' + ${user.id}}">
+                        <button title="Edit user" class="btn btn-square btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828zM6 12v2h2l6.586-6.586-2-2L6 12z"/>
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4a1 1 0 112 0v4a4 4 0 01-4 4H4a4 4 0 01-4-4V6a4 4 0 014-4h4a1 1 0 110 2H4z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>

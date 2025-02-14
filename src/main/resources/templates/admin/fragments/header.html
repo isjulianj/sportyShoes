@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="header">
+    <header class="navbar bg-base-200">
+        <div class="flex-none">
+<!--            ignore error-->
+            <label for="nav" class="btn btn-square btn-ghost lg:hidden">
+                <span th:insert="admin/fragments/hamburger-icon :: hamburger-icon"></span>
+            </label>
+        </div>
+        <div class="flex-1">
+            <a href="/admin" class="btn btn-ghost normal-case text-xl">
+            Dashboard
+            </a>
+        </div>
+    </header>
+</div>
+</body>

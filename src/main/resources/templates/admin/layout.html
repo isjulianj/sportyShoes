@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <!-- You can allow child templates to customize the title -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title layout:title-pattern="${title}" th:text="${title}">Sporty shoes</title>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Insert the header fragment -->
+<div th:insert="admin/fragments/header :: header"></div>
+
+        <div class="drawer lg:drawer-open">
+            <input id="nav" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content flex flex-col overflow-auto">
+                <main class="flex flex-col h-screen" layout:fragment="adminContent">
+                </main>
+            </div>
+            <div class="drawer-side">
+                <label
+                        for="nav"
+                        aria-label="close sidebar"
+                        class="drawer-overlay"
+                ></label>
+                <div class="w-80 min-h-screen bg-base-200 text-base-content">
+                    <div class="w-80 min-h-[calc(100vh-70px)]  flex flex-col">
+                        <ul class="menu p-4 w-80">
+                            <li>
+                                <a href="/admin">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="/admin/users">Users</a>
+                            <li>
+                        </ul>
+                        <div class="p-4 mt-auto">
+                            <form method="POST" action="/logout">
+                                <button
+                                        type="submit"
+                                        name="logout"
+                                        class="btn btn-primary w-full"
+                                >
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Insert the footer fragment -->
+<!--<footer class="mt-auto" th:insert="fragments/footer :: footer"></footer>-->
+</body>
+</html>
