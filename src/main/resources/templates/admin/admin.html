@@ -5,8 +5,8 @@
 <body>
 <!-- This fragment’s content will replace the 'content' section in layout.html -->
 <div layout:fragment="adminContent">
-    <section class="w-full">
-        hello admin
+    <section class="w-full prose p-4">
+        <h1>Hello, <span th:text="${fullName}">User</span>!</h1>
     </section>
 </div>
 </body>

@@ -8,11 +8,10 @@ import java.util.UUID;
 @Entity
 @Table(
         name = "User",
-        uniqueConstraints =
-                @UniqueConstraint(columnNames = {"email", "slug"} )
-) // make sure user emails are unique
+        uniqueConstraints = @UniqueConstraint(columnNames = {"email", "slug"})
+)
 public class User {
-    @Id // this attribute is the primary key
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

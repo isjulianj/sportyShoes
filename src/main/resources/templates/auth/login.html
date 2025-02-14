@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login to Sporty Shoes</title>
+    <link th:href="@{/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="flex flex-col min-h-screen justify-center items-center">
+    <div class="mb-6 flex items-center gap-4">
+        <div th:insert="~{fragments/logo :: logo}" class="w-40 mx-auto"></div>
+        <div>
+            <p class="text-2xl font-bold">Login</p>
+            <p class="text-2xl font-bold">Sporty Shoes</p>
+        </div>
+    </div>
+
+    <div class="mx-auto w-full max-w-lg px-8">
+        <form th:action="@{/login}" method="post" class="space-y-6" novalidate>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">
+                    Email address
+                </label>
+                <div class="mt-1">
+                    <input id="email" type="email" name="email" required autofocus autocomplete="email"
+                           class="w-full rounded border border-gray-500 px-2 py-1 text-lg"/>
+                </div>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">
+                    Password
+                </label>
+                <div class="mt-1">
+                    <input id="password" type="password" name="password" required autocomplete="current-password"
+                           class="w-full rounded border border-gray-500 px-2 py-1 text-lg"/>
+                </div>
+            </div>
+            <button type="submit"
+                    class="w-full rounded bg-[#ff4893] py-2 px-4 text-white hover:bg-[#e54084] focus:bg-[#ff5a9d]">
+                Login
+            </button>
+            <div class="flex items-center justify-center">
+                <div class="text-center text-sm text-gray-500">
+                    Don't have an account?
+                    <a class="text-[#ff4893] underline" href="/join">Join now</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+<body>
+<div layout:fragment="adminContent">
+    <section class="w-full p-6">
+        <h1>New Category</h1>
+        <form th:object="${category}" method="post">
+            <div class="form-control w-full mb-4">
+                <label for="name" class="label-text font-bold">* Name</label>
+                <input type="text" id="name" name="name" th:field="*{name}" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control w-full mb-4">
+                <label for="slug" class="label-text font-bold">* Slug</label>
+                <input type="text" id="slug" name="slug" th:field="*{slug}" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control w-full mb-4">
+                <label for="description" class="label-text font-bold">Description</label>
+                <textarea id="description" name="description" th:field="*{description}" class="textarea textarea-bordered w-full"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary text-white">Save</button>
+        </form>
+    </section>
+</div>
+</body>
+</html>

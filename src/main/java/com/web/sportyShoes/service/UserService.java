@@ -82,6 +82,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User authenticate(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && passwordEncoder.matches(password, user.getPassword().getHash())) {
+            return user;
+        }
+        return null;
+    }
+
 
     private String generateSlug(User user) {
         String firstName = user.getFirst_name() != null ? user.getFirst_name().trim().toLowerCase() : "";

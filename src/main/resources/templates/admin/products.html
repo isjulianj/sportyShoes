@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+<body>
+<!-- This fragment’s content will replace the 'content' section in layout.html -->
+<div layout:fragment="adminContent">
+    <section class="w-full p-6 prose">
+        <h1>Products</h1>
+        <div class="flex justify-center border rounded w-full md:flex-1 mb-4">
+            <input id="searchInput" class="input w-full" placeholder="Search for product" oninput="handleSearchInput()" />
+        </div>
+        <table class="table w-full">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>SKU</th>
+                <th>Price per Unit</th>
+                <th>Active</th>
+                <th>Categories</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="productsTableBody">
+            <tr th:each="product : ${products}">
+                <td class="product-name" th:text="${product.name}"></td>
+                <td class="product-sku" th:text="${product.SKU}"></td>
+                <td class="product-price" th:text="${product.price_per_unit}"></td>
+                <td class="product-active" th:text="${product.active ? 'Yes' : 'No'}"></td>
+                <td class="product-categories" th:text="${#strings.arrayJoin(product.categories.toArray(), ', ')}"></td>
+                <td>
+                    <a th:href="@{'/admin/products/edit/' + ${product.id}}">
+                        <button title="Edit product" class="btn btn-square btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828zM6 12v2h2l6.586-6.586-2-2L6 12z"/>
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4a1 1 0 112 0v4a4 4 0 01-4 4H4a4 4 0 01-4-4V6a4 4 0 014-4h4a1 1 0 110 2H4z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function handleSearchInput() {
+                const query = document.getElementById('searchInput').value.toLowerCase();
+                const rows = document.querySelectorAll('#productsTableBody tr');
+
+                rows.forEach(row => {
+                    const name = row.querySelector('.product-name').innerText.toLowerCase();
+                    const sku = row.querySelector('.product-sku').innerText.toLowerCase();
+                    const price = row.querySelector('.product-price').innerText.toLowerCase();
+                    const active = row.querySelector('.product-active').innerText.toLowerCase();
+                    const categories = row.querySelector('.product-categories').innerText.toLowerCase();
+
+                    if (name.includes(query) || sku.includes(query) || price.includes(query) || active.includes(query) || categories.includes(query)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            document.getElementById('searchInput').addEventListener('input', handleSearchInput);
+        });
+    </script>
+</div>
+
+</body>
+</html>
