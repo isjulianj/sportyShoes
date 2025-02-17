@@ -1,13 +1,13 @@
+// Before
 package com.web.sportyShoes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SportyShoesApplicationTests {
+public class SportyShoesApplicationTests {
 
 	@Test
 	void contextLoads() {
 	}
-
 }

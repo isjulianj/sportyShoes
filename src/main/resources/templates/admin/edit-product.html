@@ -31,6 +31,17 @@
                 </label>
                 <input type="checkbox" id="active" name="active" th:field="*{active}" class="checkbox" />
             </div>
+
+
+            <div class="form-control w-full mb-4">
+                <label class="flex flex-col justify-start sm:flex-row sm:justify-between select-none py-2 px-0.5" for="categories">
+                    <span class="label-text font-bold">Categories</span>
+                </label>
+                <select id="categories" name="categories" multiple class="select select-bordered w-full">
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
+                            th:selected="${product.categories.contains(category)}"></option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary text-white">Save</button>
         </form>
     </section>

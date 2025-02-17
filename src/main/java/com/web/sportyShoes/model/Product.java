@@ -14,6 +14,9 @@ public class Product {
     private float price_per_unit;
     private boolean active;
 
+    @ManyToMany(mappedBy = "products")
+    private Set<CustomerOrder> customerOrders = new HashSet<>();
+
     @ManyToMany
     @JoinTable(
             name = "product_category",
@@ -22,6 +25,7 @@ public class Product {
     )
     private Set<Category> categories = new HashSet<>();
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -70,5 +74,11 @@ public class Product {
         this.categories = categories;
     }
 
-    // Getters and setters
+    public Set<CustomerOrder> getOrders() {
+        return customerOrders;
+    }
+
+    public void setOrders(Set<CustomerOrder> customerOrders) {
+        this.customerOrders = customerOrders;
+    }
 }
