@@ -1,10 +1,8 @@
 package com.web.sportyShoes.data;
 
-import com.web.sportyShoes.model.Category;
-import com.web.sportyShoes.model.Product;
-import com.web.sportyShoes.model.User;
-import com.web.sportyShoes.model.Password;
+import com.web.sportyShoes.model.*;
 import com.web.sportyShoes.repository.CategoryRepository;
+import com.web.sportyShoes.repository.OrderRepository;
 import com.web.sportyShoes.repository.ProductRepository;
 import com.web.sportyShoes.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Date;
 
@@ -28,7 +28,7 @@ public class DataInitializer {
     }
 
     @Bean
-    CommandLineRunner initDatabase(CategoryRepository categoryRepository, ProductRepository productRepository, UserRepository userRepository) {
+    CommandLineRunner initDatabase(CategoryRepository categoryRepository, ProductRepository productRepository, UserRepository userRepository, OrderRepository orderRepository) {
         return args -> {
             // Create categories
             Category running = new Category();
@@ -97,6 +97,27 @@ public class DataInitializer {
             passwordEntity.setUser(user);
 
             userRepository.save(user);
+
+            // Create orders
+            List<Product> products = productRepository.findAll();
+            Set<Product> orderProducts = new HashSet<>(products.subList(0, 3));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            CustomerOrder order1 = new CustomerOrder();
+            order1.setUser(user);
+            order1.setProducts(orderProducts);
+            order1.setTotalAmount(500.0f);
+            order1.setCreatedAt(dateFormat.parse("2025-01-01"));
+            order1.setShippedAt(new Date());
+            orderRepository.save(order1);
+
+            CustomerOrder order2 = new CustomerOrder();
+            order2.setUser(user);
+            order2.setProducts(orderProducts);
+            order2.setTotalAmount(750.0f);
+            order2.setCreatedAt(dateFormat.parse("2025-02-01"));
+            order2.setShippedAt(new Date());
+            orderRepository.save(order2);
         };
     }
 
@@ -131,4 +152,5 @@ public class DataInitializer {
             }
         };
     }
+
 }

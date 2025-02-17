@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+<body>
+<div layout:fragment="adminContent">
+    <section class="w-full p-6 prose">
+        <h1>Orders</h1>
+        <table class="table w-full">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Products</th>
+                <th>Total Amount</th>
+                <th>Created At</th>
+                <th>Shipped At</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customerOrder : ${customerOrders}">
+                <td th:text="${customerOrder.user.email}"></td>
+                <td>
+                    <ul>
+                        <li th:each="product : ${customerOrder.products}" th:text="${product.name}"></li>
+                    </ul>
+                </td>
+                <td th:text="${customerOrder.totalAmount}"></td>
+                <td th:text="${#dates.format(customerOrder.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#dates.format(customerOrder.shippedAt, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${customerOrder.totalAmount}"></td>
+                <td>
+                    <a th:href="@{'/admin/orders/edit/' + ${customerOrder.id}}">
+                        <button>Edit</button>
+                    </a>
+                    <form th:action="@{'/admin/orders/delete/' + ${customerOrder.id}}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>

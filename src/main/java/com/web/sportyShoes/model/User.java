@@ -3,7 +3,8 @@ package com.web.sportyShoes.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -31,6 +32,9 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Password password;
+
+    @OneToMany(mappedBy = "user")
+    private Set<CustomerOrder> customerOrders = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -94,5 +98,13 @@ public class User {
 
     public void setPassword(Password password) {
         this.password = password;
+    }
+
+    public Set<CustomerOrder> getOrders() {
+        return customerOrders;
+    }
+
+    public void setOrders(Set<CustomerOrder> customerOrders) {
+        this.customerOrders = customerOrders;
     }
 }
