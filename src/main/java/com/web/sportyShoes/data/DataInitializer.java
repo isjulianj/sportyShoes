@@ -10,13 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Date;
-
 
 @Configuration
 public class DataInitializer {
@@ -93,9 +91,12 @@ public class DataInitializer {
 
             Password passwordEntity = new Password();
             passwordEntity.setHash(passwordEncoder.encode("javaproject"));
-            user.setPassword(passwordEntity);
             passwordEntity.setUser(user);
 
+            // Save the password entity first
+            user.setPassword(passwordEntity);
+
+            // Save the user entity, which will cascade and save the password entity
             userRepository.save(user);
 
             // Create orders
@@ -130,27 +131,4 @@ public class DataInitializer {
         product.setCategories(categories);
         return product;
     }
-
-    @Bean
-    CommandLineRunner runTailwindCss() {
-        return args -> {
-            ProcessBuilder processBuilder = new ProcessBuilder(
-                    "./tailwindcss-extra",
-                    "-i", "./src/main/frontend/style.css",
-                    "-o", "./src/main/resources/static/main.css"
-            );
-            processBuilder.inheritIO();
-            try {
-                Process process = processBuilder.start();
-                int exitCode = process.waitFor();
-                if (exitCode != 0) {
-                    throw new RuntimeException("Tailwind CSS command failed with exit code " + exitCode);
-                }
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-                throw new RuntimeException("Failed to run Tailwind CSS command", e);
-            }
-        };
-    }
-
 }

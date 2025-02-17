@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(
-        name = "User",
+        name = "Users",
         uniqueConstraints = @UniqueConstraint(columnNames = {"email", "slug"})
 )
 public class User {
@@ -31,9 +31,10 @@ public class User {
     private Date updatedAt;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "password_id", referencedColumnName = "id")
     private Password password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerOrder> customerOrders = new HashSet<>();
 
     public Long getId() {
