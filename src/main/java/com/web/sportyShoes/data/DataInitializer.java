@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -130,5 +131,27 @@ public class DataInitializer {
         product.setActive(active);
         product.setCategories(categories);
         return product;
+    }
+
+    @Bean
+    CommandLineRunner runTailwindCss() {
+        return args -> {
+            ProcessBuilder processBuilder = new ProcessBuilder(
+                    "./tailwindcss-extra",
+                    "-i", "./src/main/frontend/style.css",
+                    "-o", "./src/main/resources/static/main.css"
+            );
+            processBuilder.inheritIO();
+            try {
+                Process process = processBuilder.start();
+                int exitCode = process.waitFor();
+                if (exitCode != 0) {
+                    throw new RuntimeException("Tailwind CSS command failed with exit code " + exitCode);
+                }
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Failed to run Tailwind CSS command", e);
+            }
+        };
     }
 }
