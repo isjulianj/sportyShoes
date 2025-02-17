@@ -11,4 +11,4 @@ COPY target/*.jar app.jar
 EXPOSE 8098
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Xmx256m", "-Xss512k", "-jar", "app.jar"]
